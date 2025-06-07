@@ -1,0 +1,95 @@
+
+    :root {
+      --brand-blue: #4f46e5;
+      --bg-start: #eef5ff;
+      --bg-end: #ffffff;
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-card {
+      position: relative;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+      padding: 5rem 2rem 2rem;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+    .logo-wrapper {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 200px;
+      background: #fff;
+      border-radius: 16px;        /* esquinas suaves, no círculo */
+      box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+      overflow: hidden;
+      animation: float 4s ease-in-out infinite;
+    }
+    .logo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;        /* ajusta sin recortar */
+    }
+    @keyframes float {
+      0%,100% { transform: translate(-50%, 0) }
+      50%      { transform: translate(-50%, 8px) }
+    }
+    h2.login-title {
+      margin-top: 120px;
+      font-size: 2rem;
+      color: var(--brand-blue);
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    .form-control {
+      margin-bottom: 1.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .form-control:focus {
+      border-color: var(--brand-blue);
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(79,70,229,0.2);
+    }
+    .btn-login {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+    .forgot-password {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--brand-blue);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .forgot-password:hover {
+      color: #2a2abc;
+      text-decoration: underline;
+    }
+    .alert {
+      margin-top: 1.5rem;
+      text-align: left;
+    }

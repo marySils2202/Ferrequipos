@@ -1,0 +1,329 @@
+
+  :root {
+    --primary-blue: #4f46e5;
+    --secondary-purple: #8b5cf6;
+    --bg-light: #f4f4f4;
+    --bg-white: #fff;
+    --text-dark: #333;
+    --text-muted: #666;
+    --shadow-soft: rgba(0, 0, 0, 0.08);
+  }
+
+  /* ===========================
+     RESET Y ESTILOS GENERALES
+     =========================== */
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Segoe UI", sans-serif;
+    background: var(--bg-light);
+    margin: 0;
+    padding: 30px;
+    color: var(--text-dark);
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  h1, h2 {
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* ===========================
+     BOTÓN “VOLVER” FIJO
+     =========================== */
+  .back-corner {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 48px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px var(--shadow-soft);
+    transition: transform 0.2s, opacity 0.2s;
+    z-index: 1000;
+  }
+  .back-corner:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+  }
+
+  /* ===========================
+     CONTENEDOR PRINCIPAL
+     =========================== */
+  .wrapper {
+    background: var(--bg-white);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--shadow-soft);
+    max-width: 1080px;
+    margin: auto;
+  }
+
+  /* ===========================
+     BOTÓN FLOTANTE “CLIENTES”
+     =========================== */
+  .btn-float {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background-color: #6c757d;
+    color: #fff;
+    box-shadow: 0 4px 12px var(--shadow-soft);
+    transition: background-color 0.2s, transform 0.2s;
+    z-index: 1000;
+  }
+  .btn-float:hover {
+    background-color: #5a646f;
+    transform: translateY(-2px);
+  }
+
+  /* ===========================
+     BOTÓN “LIMPIAR” FIJO
+     =========================== */
+  .btn-limpiar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+  }
+  .btn-limpiar span {
+    display: block;
+    font-size: .75rem;
+  }
+
+  /* ===========================
+     FORMULARIO “NUEVO CRÉDITO”
+     =========================== */
+  .row-g3 {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .row-g3 .form-control {
+    margin-bottom: 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .row-g3 .form-control:focus {
+    border-color: var(--secondary-purple);
+    box-shadow: 0 0 0 3px rgba(143, 63, 244, 0.2);
+    outline: none;
+  }
+
+  .btn-registrar-cliente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #6c757d;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    width: 100%;
+  }
+  .btn-registrar-cliente .icon {
+    font-size: 1.4rem;
+    color: #a986ff;
+    margin-bottom: 4px;
+  }
+  .btn-registrar-cliente:hover {
+    background-color: #5a646f;
+    transform: translateY(-2px);
+  }
+
+  /* ===========================
+     ENTRADAS Y TEXTAREA
+     =========================== */
+  input[list], textarea {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input[list]:focus, textarea:focus {
+    border-color: var(--secondary-purple);
+    box-shadow: 0 0 0 3px rgba(143, 63, 244, 0.2);
+    outline: none;
+  }
+  textarea {
+    resize: none;
+    background: #fafafa;
+  }
+
+  /* ===========================
+     BOTONES DE ACCIÓN
+     =========================== */
+  .btn-secondary {
+    background: var(--primary-blue);
+    border: none;
+    color: #fff;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover {
+    background-color: var(--secondary-purple);
+    transform: translateY(-2px);
+  }
+  .btn-warning {
+    background: #f59e0b;
+    border: none;
+    color: #fff;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  .btn-warning:hover {
+    background-color: #d97706;
+    transform: translateY(-2px);
+  }
+
+  /* ===========================
+     TABLA “CARRITO”
+     =========================== */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-bottom: 1.5rem;
+  }
+  thead th {
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    font-weight: 600;
+    border: none;
+  }
+  tbody tr {
+    background: var(--bg-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+  tbody td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    font-size: 0.95rem;
+  }
+  .table-sm td {
+    padding: 8px;
+  }
+
+  /* ===========================
+     BOTÓN CÍRCULO “×”
+     =========================== */
+  .btn-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  .btn-circle:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+  }
+
+  /* ===========================
+     ESTILOS RESPONSIVOS
+     =========================== */
+  @media (max-width: 768px) {
+    .row-g3 {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn-registrar-cliente {
+      width: 100%;
+    }
+    thead th {
+      font-size: 0.85rem;
+    }
+    tbody td {
+      font-size: 0.85rem;
+      padding: 8px;
+    }
+  }
+  /* ==============================
+   CABECERA: LOGO + TÍTULO
+   ============================== */
+.header-container {
+  display: flex;
+  flex-direction: column;      /* Logo encima del título */
+  align-items: center;         /* Centra horizontalmente */
+  margin-bottom: 30px;         /* Separación debajo */
+}
+
+/* Estilo para la imagen del logo */
+.header-container .logo {
+  width: 200px;                /* Ajusta este valor al tamaño deseado */
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 12px;         /* Espacio entre logo y título */
+  border-radius: 8px;          /* Opcional, bordes redondeados */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, opacity 0.2s;
+}
+.header-container .logo:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Estilo para el <h1> junto al logo */
+.header-container .main-title {
+  font-size: 2rem;
+  color: var(--primary-blue);
+  margin: 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ==============================
+   ADAPTACIÓN RESPONSIVA
+   ============================== */
+@media (max-width: 768px) {
+  .header-container .logo {
+    width: 120px;              /* Tamaño más pequeño en móviles */
+    margin-bottom: 8px;
+  }
+  .header-container .main-title {
+    font-size: 1.5rem;
+  }
+}

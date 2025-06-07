@@ -1,0 +1,56 @@
+
+    body {
+      background-color: #eef5ff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+    }
+    #compraAlert {
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    form#formRegistrarCompra {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      max-width: 600px;
+      margin: auto;
+    }
+    form#formRegistrarCompra h4 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4361ee;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    form#formRegistrarCompra label {
+      font-weight: 600;
+      color: #374151;
+    }
+    form#formRegistrarCompra .form-control,
+    form#formRegistrarCompra .form-select {
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      padding: 10px 15px;
+      transition: border-color 0.3s;
+    }
+    form#formRegistrarCompra .form-control:focus,
+    form#formRegistrarCompra .form-select:focus {
+      border-color: #4cc9f0;
+      box-shadow: 0 0 0 2px rgba(76, 201, 240, 0.25);
+    }
+    form#formRegistrarCompra button {
+      width: 100%;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+      transition: background 0.3s, transform 0.2s;
+    }
+    form#formRegistrarCompra button:hover {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      transform: translateY(-2px);
+    }

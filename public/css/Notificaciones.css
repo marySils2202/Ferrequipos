@@ -1,0 +1,100 @@
+
+    .botones-finale {
+      display: block;
+      width: 100%;
+      margin-top: 2rem;
+      padding: 0.75rem;
+      background: linear-gradient(90deg,#4f46e5,#8b5cf6);
+      color: #fff;
+      text-align: center;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+      cursor: pointer;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .botones-finale:hover {
+      transform: translateY(-2px);
+      opacity: .9;
+    }
+    :root {
+      --bg-gradient-start: #f3f4f6;
+      --bg-gradient-end: #ffffff;
+      --brand-primary: #4f46e5;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0,0,0,0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(120deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      font-family: 'Segoe UI', sans-serif;
+      color: #1f2937;
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .card-container {
+      width: 100%; max-width: 900px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 4px 20px var(--card-shadow);
+    }
+    h2 {
+      color: var(--brand-primary);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+    }
+    .accordion-item + .accordion-item { margin-top: 1rem; }
+    .accordion-header {
+      width: 100%;
+      padding: 1rem;
+      background: var(--card-bg);
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      color: var(--brand-primary);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px var(--card-shadow);
+      transition: background 0.2s ease;
+    }
+    .accordion-header:hover { background: #f0f4ff; }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: var(--card-bg);
+      border-left: 1px solid #e5e7eb;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      border-radius: 0 0 8px 8px;
+      padding: 0 1rem;
+    }
+    .accordion-body.show { padding: 1rem; max-height: 500px; }
+    .alert {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .alert-success { background: #d1fae5; color: #065f46; }
+    .alert-warning { background: #fef3c7; color: #92400e; }
+    .table { width:100%; border-collapse: collapse; margin-top:1rem; }
+    .table th, .table td {
+      border:1px solid #e5e7eb;
+      padding:0.75rem;
+      text-align:left;
+      font-size:0.95rem;
+    }
+    .table th { background: var(--brand-primary); color:#fff; }
+    .accordion-icon { font-size:1.25rem; transition:transform 0.3s ease; }
+    .accordion-icon.rotate { transform:rotate(90deg); }

@@ -1,0 +1,62 @@
+      :root {
+      --brand-blue: #4f46e5;
+      --brand-light: #8b5cf6;
+      --shadow-sm: 0 4px 12px rgba(0,0,0,.05);
+      --border-radius: 8px;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 2rem;
+      position: relative;
+    }
+    .back-corner {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 44px; height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(90deg, var(--brand-blue), var(--brand-light));
+      color: #fff;
+      font-size: 1.4rem;
+      text-decoration: none;
+      border-radius: 50%;
+      box-shadow: var(--shadow-sm);
+      transition: transform .2s, opacity .2s;
+      z-index: 1000;
+    }
+    .back-corner:hover {
+      transform: translateY(-2px);
+      opacity: .9;
+    }
+    .page-title {
+      text-align: center;
+      color: var(--brand-blue);
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      justify-content: center;
+    }
+    .chart-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .chart-container {
+      position: relative;
+      height: 400px;
+    }
+    .btn-group-filters .form-select,
+    .btn-group-filters .btn {
+      border-radius: 999px;
+    }

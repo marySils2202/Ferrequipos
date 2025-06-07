@@ -1,0 +1,240 @@
+:root {
+  --brand-blue: #4f46e5;
+  --brand-light: #8b5cf6;
+  --bg-start: #f3f4f6;
+  --bg-end: #ffffff;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+.inv-card {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 50px 40px 60px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+  position: relative;
+}
+
+.back-corner {
+  position: absolute;
+  top: 25px; left: 25px;
+  width: 44px; height: 44px;
+  display: flex; justify-content: center; align-items: center;
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-light));
+  color: #fff; font-size: 1.4rem; font-weight: bold;
+  text-decoration: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  transition: transform .2s, opacity .2s;
+}
+.back-corner:hover {
+  transform: translateY(-2px);
+  opacity: .9;
+}
+
+h2 {
+  color: var(--brand-blue);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.alert {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .05);
+  padding: 12px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto 30px;
+  max-width: 900px;
+}
+
+.filter-input {
+  flex: 1 1 200px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  background: transparent;
+  border: 2px solid var(--brand-blue);
+  border-radius: 999px;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+  transition: border-color .2s, box-shadow .2s;
+}
+.filter-input::placeholder {
+  color: #aaa;
+}
+.filter-input:focus {
+  border-color: var(--brand-light);
+  box-shadow: 0 0 0 3px rgba(143,63,244,.2);
+}
+
+.filter-btn,
+.download-btn,
+#toggleAll {
+  padding: 8px 20px;
+  font-size: .9rem;
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform .2s, opacity .2s, background .2s, color .2s;
+  border: none;
+}
+
+.filter-btn {
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-light));
+  color: #fff;
+}
+.filter-btn:hover {
+  transform: translateY(-2px);
+  opacity: .9;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  color: var(--brand-blue);
+  border: 2px solid var(--brand-blue);
+  text-decoration: none;
+}
+.download-btn:hover {
+  background: var(--brand-blue);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+#toggleAll {
+  background: transparent;
+  color: var(--brand-blue);
+  border: 2px solid var(--brand-blue);
+}
+#toggleAll:hover {
+  background: var(--brand-blue);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.table-wrap {
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 30px;
+}
+.table-wrap.collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 60px;
+  background: linear-gradient(to top, #fff, rgba(255,255,255,0));
+  pointer-events: none;
+}
+.table-wrap.expanded {
+  max-height: none;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+thead th {
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-light));
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+tbody tr {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .03);
+}
+tbody td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  border: none;
+}
+
+.low-stock {
+  background: #ffe7e7 !important;
+}
+.warn-stock {
+  background: #fff7d6 !important;
+}
+.ok-stock {
+  background: #e9f9ec !important;
+}
+
+.badge-stock {
+  display: inline-block;
+  margin-left: 6px;
+  padding: .25rem .55rem;
+  border-radius: 20px;
+  font-size: .75rem;
+  font-weight: 600;
+  color: #fff;
+}
+.badge-low {
+  background: #f94144;
+}
+.badge-warn {
+  background: #f59e0b;
+}
+.badge-ok {
+  background: #10b981;
+}
+
+/* ------------------------------------------------------------
+   Aquí agregamos el estilo específico para el checkbox “Solo stock bajo”
+------------------------------------------------------------ */
+.filter-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 2px solid var(--brand-blue);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--brand-blue);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.filter-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--brand-blue);
+  cursor: pointer;
+  transition: accent-color 0.2s ease;
+}
+
+.filter-checkbox:hover {
+  background: var(--brand-blue);
+  color: #fff;
+}
+.filter-checkbox:hover input[type="checkbox"] {
+  accent-color: #fff;
+}

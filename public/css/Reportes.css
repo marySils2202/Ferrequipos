@@ -1,0 +1,107 @@
+
+    :root {
+      --brand-blue: #4f46e5;
+      --brand-light: #8b5cf6;
+      --bg-start: #f3f4f6;
+      --bg-end: #ffffff;
+    }
+    body {
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+    }
+    .report-card {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 40px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      position: relative;
+    }
+    .back-corner {
+      position: absolute;
+      top: 20px; left: 20px;
+      width: 44px; height: 44px;
+      display: flex; justify-content: center; align-items: center;
+      background: linear-gradient(90deg, var(--brand-blue), var(--brand-light));
+      color: #fff; font-size: 1.4rem; font-weight: bold;
+      text-decoration: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      transition: transform .2s, opacity .2s;
+    }
+    .back-corner:hover { transform: translateY(-2px); opacity: .9; }
+
+    h2 {
+      color: var(--brand-blue);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .filter-bar .form-select,
+    .filter-bar .form-control,
+    .filter-bar .btn {
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: .9rem;
+      outline: none;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .filter-bar .form-select,
+    .filter-bar .form-control {
+      border: 2px solid var(--brand-blue);
+      background: transparent;
+      flex: 1 1 200px;
+    }
+    .filter-bar .form-select:focus,
+    .filter-bar .form-control:focus {
+      border-color: var(--brand-light);
+      box-shadow: 0 0 0 3px rgba(143,63,244,.2);
+    }
+    .filter-bar .btn-primary {
+      background: linear-gradient(90deg, var(--brand-blue), var(--brand-light));
+      color: #fff;
+      border: none;
+    }
+    .filter-bar .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+    .filter-bar .btn-outline-secondary {
+      border: 2px solid var(--brand-blue);
+      color: var(--brand-blue);
+      background: #fff;
+    }
+    .filter-bar .btn-outline-secondary:hover {
+      background: var(--brand-blue);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .filter-bar .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      color: var(--brand-blue);
+      border: 2px solid var(--brand-blue);
+    }
+    .filter-bar .btn-print:hover {
+      background: var(--brand-blue);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .results {
+      margin-top: 20px;
+    }

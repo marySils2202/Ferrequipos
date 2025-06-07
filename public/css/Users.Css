@@ -1,0 +1,101 @@
+
+.back-button a{
+  display:inline-block;                /* respeta ancho de su texto */
+  background:linear-gradient(90deg,#4f46e5,#8b5cf6); /* degradado azul‑violeta */
+  color:#fff !important;
+  border:none;
+  padding:0.75rem 2rem;
+  border-radius:8px;
+  font-weight:600;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  transition:transform .2s ease,opacity .2s ease;
+}
+.back-button a:hover{
+  transform:translateY(-2px);
+  opacity:.9;
+}
+
+  :root{
+    --brand-blue:#4f46e5;
+    --brand-light:#8b5cf6;
+    --brand-gray:#40414f;
+    --bg-start:#f3f4f6;
+    --bg-end:#ffffff;
+  }
+
+  body{
+    background:linear-gradient(135deg,var(--bg-start),var(--bg-end));
+    font-family:'Segoe UI',sans-serif;
+    margin:0;padding:30px;
+  }
+
+  .container-usuarios{
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    max-width:1000px;
+    margin:auto;
+    padding:50px;
+  }
+
+  h1,h3{
+    text-align:center;
+    color:var(--brand-blue);
+    margin-bottom:20px;
+  }
+
+  .form-agregar,
+  .edit-form{
+    background:#f9fcff;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+    padding:30px;
+    margin-bottom:40px;
+  }
+  .edit-form{margin-top:10px;padding:20px;}
+
+  .form-control{margin-bottom:15px;}
+
+  /* Tabla */
+  table{
+    width:100%;
+    margin-top:20px;
+    border-collapse:separate;
+    border-spacing:0 8px;
+  }
+  table th{
+    background:linear-gradient(90deg,var(--brand-blue),var(--brand-light));
+    color:#fff;text-align:center;border:none;padding:12px;
+  }
+  table td{
+    background:#fff;
+    border:none;
+    vertical-align:middle;
+    text-align:center;
+    padding:12px;
+    box-shadow:0 2px 6px rgba(0,0,0,.03);
+  }
+
+  /* Botones */
+  .btn{transition:transform .2s ease,opacity .2s ease;}
+
+  .btn-success,
+  .btn-primary.btn-sm{
+    background:linear-gradient(90deg,var(--brand-blue),var(--brand-light));
+    border:none;color:#fff;
+  }
+  .btn-success:hover,
+  .btn-primary.btn-sm:hover{transform:translateY(-2px);opacity:.9;}
+
+  .btn-danger.btn-sm{
+    background:#f94144;border:none;color:#fff;
+  }
+  .btn-danger.btn-sm:hover{opacity:.9;transform:translateY(-2px);}
+
+  .btn-outline-dark{
+    background:linear-gradient(90deg,var(--brand-gray),#2e3039);
+    border:none;color:#fff!important;
+  }
+  .btn-outline-dark:hover{transform:translateY(-2px);opacity:.9;}
+
+  .back-button{text-align:center;margin-top:30px;}
