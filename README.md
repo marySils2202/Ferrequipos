@@ -68,3 +68,34 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 =======
 # MTQ2025
 >>>>>>> 63e7cd2f0f9749001bca194b8a3580e7ebc55094
+## 📦 Instalación y puesta en marcha
+
+Sigue estos pasos tras clonar el repositorio para tener la aplicación corriendo en tu máquina:
+
+1. Clona el repositorio y entra en la carpeta:  
+   `git clone https://github.com/tu-usuario/MTQ2025.git && cd MTQ2025`
+
+2. Instala las dependencias de PHP:  
+   `composer install`
+
+3. Copia y configura el env:  
+   `cp .env.example .env`  
+   Edita `.env` y ajusta las credenciales de tu base de datos (`DB_*`) y pon:  
+   `APP_URL=https://mtq2025.test`
+
+4. Genera la clave de la aplicación:  
+   `php artisan key:generate`
+
+5. Ejecuta migraciones y seeders (crea tablas y datos de ejemplo):  
+   `php artisan migrate:fresh --seed`
+
+6. (Opcional) Instala y compila assets si usas Mix/Vite:  
+   `npm install && npm run dev`
+
+7. Configura el host local añadiendo al archivo de hosts:  
+   `127.0.0.1   mtq2025.test`  
+   y apunta tu virtual host o Valet al directorio `public/` del proyecto.
+
+8. Abre en tu navegador:  
+   `https://mtq2025.test/home`
+ 
