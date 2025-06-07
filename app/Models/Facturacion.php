@@ -57,33 +57,27 @@ class Facturacion extends Model
         return $this->belongsTo(Mecanico::class, 'mecanico_id', 'id_mecanico');
     }
 
-    /**
-     * Accesor: calcula la ganancia de esta factura (Venta del Día),
-     * usando para cada detalle la diferencia entre precio_venta y costo de compra promedio.
-     */
+
     public function getGananciaDiariaAttribute()
     {
         $ganancia = 0;
 
-        // Recorremos cada detalle de la factura
+
         foreach ($this->detalles as $detalle) {
             // Precio de venta por unidad
             $precioVenta = $detalle->producto->precio_venta;
 
-            // Costo de compra promedio del producto:
-            // asumimos que en Producto está definida la relación detallesCompras()
+
             $precioCompraPromedio = $detalle->producto
                                             ->detallesCompras
                                             ->avg('precio_unitario');
 
-            // Cantidad vendida en este detalle
+
             $cantidadVendida = $detalle->cantidad;
 
-            // Si por alguna razón no hay compras registradas,
-            // asumimos costo cero para no romper cálculo
             $costo = $precioCompraPromedio ?: 0;
 
-            // Sumar (precioVenta - costo) * cantidadVendida
+
             $ganancia += ($precioVenta - $costo) * $cantidadVendida;
         }
 

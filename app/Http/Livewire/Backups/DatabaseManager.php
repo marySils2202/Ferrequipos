@@ -17,13 +17,13 @@ class DatabaseManager extends Component
     protected function rules()
     {
         return [
-            'backupFile' => 'required|file|mimes:bak,sql|max:50000', // 50MB máximo
+            'backupFile' => 'required|file|mimes:bak,sql|max:50000', 
         ];
     }
 
     public function render()
     {
-        // Devuelve solo la vista del componente, sin layout implicado
+
         return view('livewire.backups.database-manager');
     }
 

@@ -36,18 +36,12 @@
         <tbody>
           @forelse($ventas as $venta)
             <tr>
-              {{-- Fecha formateada --}}
+
               <td data-fecha="{{ $venta->fecha->format('Y-m-d') }}">
                 {{ $venta->fecha->locale('es')->translatedFormat('j \d\e F Y') }}
               </td>
-
-              {{-- Venta del Día (diferencia de arqueo) --}}
               <td>₡S {{ number_format($venta->arqueo->diferencia, 2) }}</td>
-
-              {{-- Ganancia Diaria (accesor calculado) --}}
               <td>₡S {{ number_format($venta->ganancia_diaria, 2) }}</td>
-
-              {{-- Quién cerró la caja --}}
               <td>{{ optional($venta->arqueo->impresor)->nombre ?? '—' }}</td>
             </tr>
           @empty

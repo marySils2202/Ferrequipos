@@ -80,8 +80,7 @@ public function edit($id)
                          ->with('error','Solo puedes editar arqueos ya cerrados.');
     }
 
-    // ----- Cópia el cálculo de ventas y cierres de index() -----
-    // 1) Ventas del período 6am-6am
+  
     $totalVentas = null;
     if ($abierto) {
         $now = Carbon::now();
@@ -94,14 +93,10 @@ public function edit($id)
         }
         $totalVentas = Facturacion::whereBetween('fecha', [$start,$end])->sum('total');
     }
-
-    // 2) Último cierre o 0 si no hay
     $ultimoCierre = Arqueo::whereNotNull('monto_final')
                          ->latest('id_arqueo')
                          ->value('monto_final')
                    ?? 0;
-
-    // 3) Monto final calculado (igual que index)
     $montoFinalCalculado = $abierto
         ? round($abierto->monto_inicial + $totalVentas, 2)
         : null;

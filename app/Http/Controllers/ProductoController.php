@@ -12,10 +12,8 @@ class ProductoController extends Controller
 
 public function index()
 {
-    // “with('categoria')” evita el problema de N+1 al acceder a $producto->categoria->nombre_categoria
     $productos  = Producto::with('categoria')->get();
 
-    // Todas las categorías, para luego construir el <select> en la tabla
     $categorias = Categoria::all();
 
     return view('agregar_producto', compact('productos', 'categorias'));
@@ -86,7 +84,6 @@ public function index()
         'stock_minimo',
     ]));
 
-    // Recargamos la relación para devolver el nombre de la categoría en JSON
     $producto->load('categoria');
 
     if ($request->wantsJson()) {

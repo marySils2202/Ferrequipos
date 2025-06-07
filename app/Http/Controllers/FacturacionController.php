@@ -87,20 +87,18 @@ public function store(Request $request)
         foreach ($data['id_producto'] as $i => $pid) {
             $cantidad = $data['cantidad'][$i];
 
-            // 1. Crear detalle de factura
             $fac->detalles()->create([
                 'id_producto' => $pid,
                 'cantidad'    => $cantidad,
             ]);
 
-            // 2. Descontar del inventario (si no es crédito)
+
             if ($data['metodo_pago'] !== 'credito') {
                 $inventario = Inventario::where('id_producto', $pid)->firstOrFail();
                 $inventario->cantidad_stock = max(0, $inventario->cantidad_stock - $cantidad);
                 $inventario->fecha_actualizacion = now();
                 $inventario->save();
 
-                // 3. Registrar movimiento
                 Movimiento::create([
                     'id_producto' => $pid,
                     'tipo'        => 'salida',
@@ -157,25 +155,20 @@ public function reprint($id)
 
 public function audit(Request $request)
 {
-    // 1) Calculamos ventana: hoy 6am hasta mañana 6am
     $hoy6am     = now()->startOfDay()->addHours(6);
     $maniana6am = (clone $hoy6am)->addDay();
-
-    // 2) Obtenemos detalle_factura con sus relaciones facturas→cliente y producto
     $movimientos = DetalleFactura::with([
             'producto',
-            'factura.cliente'   // <-- aquí incluimos cliente
+            'factura.cliente' 
         ])
         ->whereHas('factura', function($q) use ($hoy6am, $maniana6am) {
             $q->whereBetween('fecha', [$hoy6am, $maniana6am]);
         })
         ->get();
 
-    // 3) Generamos el PDF
     $pdf = app('dompdf.wrapper')
         ->loadView('pdf.audit', compact('movimientos','hoy6am','maniana6am'));
 
-    // 4) Devolvemos para descarga
     return $pdf->download("auditoria_{$hoy6am->format('Ymd_Hi')}.pdf");
 }
 

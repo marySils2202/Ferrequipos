@@ -19,15 +19,11 @@ class EstadisticasController extends Controller
         $tipo   = $request->get('tipo', 'month');
         $mes    = $request->get('mes');
         $semana = $request->get('semana');
-
-        // 1) Opciones para selector de meses (últimos 12 meses)
         $opMes = [];
         for ($i = 0; $i < 12; $i++) {
             $dt = Carbon::now()->startOfMonth()->subMonths($i);
             $opMes[$dt->format('Y-m')] = $dt->locale('es')->translatedFormat('F Y');
         }
-
-        // 2) Si estamos en "week" y hay mes seleccionado, armamos las semanas
         $opSem = [];
         if ($tipo === 'week' && $mes) {
             [$y, $m] = explode('-', $mes);
@@ -52,25 +48,17 @@ class EstadisticasController extends Controller
                 $cursor->addWeek();
             }
         }
-
-        // 3) Inicializamos arrays para los gráficos de Ventas/Ganancias
         $labels         = [];
         $ventasData     = [];
         $gananciasData  = [];
-
-        // Variables globales para KPI
         $totalUnidadesVendidas  = 0;
         $totalVentasPeriodo     = 0.0;
         $totalGananciasPeriodo  = 0.0;
         $manoObraTotal          = 0.0;
         $descuentoTotal         = 0.0;
         $facturasConDescuento   = 0;
-
-        // Rango de fechas
         $inicioPeriodo = null;
         $finPeriodo    = null;
-
-        // 4) Rellenar datos día a día (mes) o día a día (semana)
         if ($tipo === 'month' && $mes) {
             [$y, $m] = explode('-', $mes);
             $d = Carbon::create($y, $m, 1);
@@ -82,15 +70,12 @@ class EstadisticasController extends Controller
                 $fecha = $d->copy()->day($day);
                 $labels[] = $fecha->format('d');
 
-                // Venta del Día
                 $totalesArqueo = Arqueo::whereDate('fecha', $fecha)
                     ->whereNotNull('monto_final')
                     ->get()
                     ->sum(fn($a) => $a->diferencia);
                 $ventasData[] = round($totalesArqueo, 2);
                 $totalVentasPeriodo += round($totalesArqueo, 2);
-
-                // Ganancia Diaria + Mano de Obra + Descuento
                 $facturasDiarias = Facturacion::with('detalles.producto.detallesCompras')
                     ->whereDate('fecha', $fecha)
                     ->get();
@@ -133,7 +118,6 @@ class EstadisticasController extends Controller
                 $dia = $inicioSemana->copy()->addDays($i);
                 $labels[] = $dia->locale('es')->format('D d');
 
-                // Venta del Día
                 $totalesArqueo = Arqueo::whereDate('fecha', $dia)
                     ->whereNotNull('monto_final')
                     ->get()
@@ -141,7 +125,6 @@ class EstadisticasController extends Controller
                 $ventasData[] = round($totalesArqueo, 2);
                 $totalVentasPeriodo += round($totalesArqueo, 2);
 
-                // Ganancia Diaria + Mano de Obra + Descuento
                 $facturasDiarias = Facturacion::with('detalles.producto.detallesCompras')
                     ->whereDate('fecha', $dia)
                     ->get();
@@ -173,7 +156,6 @@ class EstadisticasController extends Controller
             }
         }
 
-        // 5) Gráfico: Ventas vs Ganancias
         $chartVentasYGanancias = new Chart();
         $chartVentasYGanancias->labels($labels);
         $chartVentasYGanancias->dataset(
@@ -195,7 +177,6 @@ class EstadisticasController extends Controller
             'maintainAspectRatio'   => false,
         ]);
 
-        // 6) Gráfico: Productos Vendidos por Categoría
         $categoriasCounts = [];
         $categoriasLabels = [];
         $categoriasData   = [];
@@ -231,13 +212,12 @@ class EstadisticasController extends Controller
             'maintainAspectRatio'   => false,
         ]);
 
-        // 7) Estadísticas adicionales: Cliente con más facturas
         $clienteMasVisitas   = null;
         $visitasClienteMax   = 0;
         $clientesLabels      = [];
         $clientesData        = [];
         if ($inicioPeriodo && $finPeriodo) {
-            // Top 1 Cliente
+
             $topCliente = DB::table('facturacion')
                 ->select('id_cliente', DB::raw('COUNT(*) as visitas'))
                 ->whereBetween('fecha', [$inicioPeriodo, $finPeriodo])
@@ -253,7 +233,6 @@ class EstadisticasController extends Controller
                 }
             }
 
-            // Gráfico de todos los clientes (barras)
             $todosClientes = DB::table('facturacion')
                 ->select('id_cliente', DB::raw('COUNT(*) as visitas'))
                 ->whereBetween('fecha', [$inicioPeriodo, $finPeriodo])
@@ -283,7 +262,6 @@ class EstadisticasController extends Controller
             ]
         ]);
 
-        // 8) Estadística: Día más productivo
         $diaMasProductivo       = null;
         $ventasDiaMasProductivo = 0.0;
         if ($inicioPeriodo && $finPeriodo) {
@@ -302,13 +280,11 @@ class EstadisticasController extends Controller
             }
         }
 
-        // 9) Estadística: Mecánico con más mano de obra
         $mecanicoMasMano      = null;
         $manoObraMecanicoMax  = 0.0;
         $mecanicosLabels      = [];
         $mecanicosData        = [];
         if ($inicioPeriodo && $finPeriodo) {
-            // Top 1 Mecánico
             $topMeca = DB::table('facturacion')
                 ->select('mecanico_id', DB::raw('SUM(mano_obra) as suma_mano'))
                 ->whereBetween('fecha', [$inicioPeriodo, $finPeriodo])
@@ -325,7 +301,6 @@ class EstadisticasController extends Controller
                 }
             }
 
-            // Gráfico de todos los mecánicos (barras)
             $todosMeca = DB::table('facturacion')
                 ->select('mecanico_id', DB::raw('SUM(mano_obra) as suma_mano'))
                 ->whereBetween('fecha', [$inicioPeriodo, $finPeriodo])
@@ -356,7 +331,6 @@ class EstadisticasController extends Controller
             ]
         ]);
 
-        // 10) Promedio de descuento
         $promedioDescuento = $facturasConDescuento
             ? round($descuentoTotal / $facturasConDescuento, 2)
             : 0.0;
@@ -368,11 +342,9 @@ class EstadisticasController extends Controller
             'opMes'                   => $opMes,
             'opSem'                   => $opSem,
 
-            // Gráficos principales
             'chartVentasYGanancias'   => $chartVentasYGanancias,
             'chartCategorias'         => $chartCategorias,
 
-            // KPI
             'totalUnidadesVendidas'   => $totalUnidadesVendidas,
             'totalVentasPeriodo'      => round($totalVentasPeriodo, 2),
             'totalGananciasPeriodo'   => round($totalGananciasPeriodo, 2),
@@ -381,16 +353,14 @@ class EstadisticasController extends Controller
             'promedioDescuento'       => $promedioDescuento,
             'facturasConDescuento'    => $facturasConDescuento,
 
-            // Cliente top
+
             'clienteMasVisitas'       => $clienteMasVisitas,
             'visitasClienteMax'       => $visitasClienteMax,
             'chartClientes'           => $chartClientes,
 
-            // Día más productivo
             'diaMasProductivo'        => $diaMasProductivo,
             'ventasDiaMasProductivo'  => round($ventasDiaMasProductivo, 2),
 
-            // Mecánico top
             'mecanicoMasMano'         => $mecanicoMasMano,
             'manoObraMecanicoMax'     => round($manoObraMecanicoMax, 2),
             'chartMecanicos'          => $chartMecanicos,

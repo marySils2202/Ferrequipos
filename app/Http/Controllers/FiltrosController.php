@@ -18,7 +18,6 @@ class FiltrosController extends Controller
         $cliente_nombre  = $request->query('cliente_nombre', '');
         $credito_estado  = $request->query('credito_estado', '');
 
-        // Inicializamos
         $clientes    = collect();
         $usuarios    = collect();
         $proveedores = collect();
@@ -78,14 +77,11 @@ class FiltrosController extends Controller
 
             case 'creditos':
                 $creditos = Credito::with('factura.cliente')
-                    // filtrar por nombre de cliente parcial
                     ->when($cliente_nombre, fn($q) =>
                         $q->whereHas('factura.cliente', fn($q2) =>
                             $q2->where('nombre', 'like', "%{$cliente_nombre}%")
                         )
-                    )
-                    // filtrar por estado
-                    ->when($credito_estado === 'pendiente', fn($q) =>
+                    )                    ->when($credito_estado === 'pendiente', fn($q) =>
                         $q->whereColumn('monto_pagado', '<', 'monto_total')
                     )
                     ->when($credito_estado === 'pagado', fn($q) =>

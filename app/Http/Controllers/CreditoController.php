@@ -13,12 +13,10 @@ class CreditoController extends Controller
    
   public function index()
     {
-        // 1) Todos los créditos con su factura y cliente
         $creditos = Credito::with('factura.cliente')
                            ->orderBy('estado')
                            ->get();
 
-        // 2) Sólo los pendientes (saldo > 0)
         $creditosPendientes = $creditos
             ->filter(fn($c) => $c->saldo > 0)
             ->map(fn($c) => [
@@ -26,14 +24,10 @@ class CreditoController extends Controller
                 'cliente'    => $c->factura->cliente,
                 'saldo'      => $c->saldo,
             ]);
-
-        // 3) Inventario (producto + stock) y lista de clientes
         $inventarios = Inventario::with('producto')
                                  ->where('cantidad_stock', '>', 0)
                                  ->get();
         $clientes = Cliente::all();
-
-        // 4) Renderiza la vista
         return view('facturacion.creditos', [
             'creditos'            => $creditos,
             'creditosPendientes'  => $creditosPendientes,
@@ -83,7 +77,6 @@ public function store(Request $req)
             $total += $p->precio_venta * $prod['cantidad'];
         }
 
-        // Crear factura
         $facturaId = DB::table('facturacion')->insertGetId([
             'id_cliente'      => $data['id_cliente'],
             'id_usuario'      => auth()->id(),
@@ -94,25 +87,18 @@ public function store(Request $req)
             'metodo_pago'     => 'credito',
             'saldo_pendiente' => $total,
         ]);
-
-        // Registrar detalle y afectar inventario y movimientos
         foreach ($data['productos'] as $prod) {
-            // 1. Insertar detalle de factura
             DB::table('detalle_factura')->insert([
                 'id_factura' => $facturaId,
                 'id_producto' => $prod['id_producto'],
                 'cantidad'    => $prod['cantidad'],
             ]);
-
-            // 2. Descontar inventario
             DB::table('inventario')
                 ->where('id_producto', $prod['id_producto'])
                 ->update([
                     'cantidad_stock'      => DB::raw("GREATEST(0, cantidad_stock - {$prod['cantidad']})"),
                     'fecha_actualizacion' => now(),
                 ]);
-
-            // 3. Insertar movimiento de salida
             DB::table('movimientos')->insert([
                 'id_producto' => $prod['id_producto'],
                 'tipo'        => 'salida',
@@ -121,8 +107,6 @@ public function store(Request $req)
                 'fecha'       => now(),
             ]);
         }
-
-        // Crear registro de crédito
         DB::table('creditos')->insert([
             'id_factura'   => $facturaId,
             'monto_total'  => $total,
@@ -201,19 +185,14 @@ public function cancelar($id)
 public function reembolsoCredito($id)
 {
     DB::transaction(function () use ($id) {
-        // Obtener el crédito y la factura
         $credito = DB::table('creditos')->where('id_credito', $id)->first();
         if (!$credito) abort(404, 'Crédito no encontrado.');
 
         $facturaId = $credito->id_factura;
 
-        // Obtener detalles de la factura
         $detalles = DB::table('detalle_factura')->where('id_factura', $facturaId)->get();
-
         foreach ($detalles as $detalle) {
-            // Reponer stock
             $inventario = DB::table('inventario')->where('id_producto', $detalle->id_producto)->first();
-
             if ($inventario) {
                 DB::table('inventario')
                     ->where('id_producto', $detalle->id_producto)
@@ -228,8 +207,6 @@ public function reembolsoCredito($id)
                     'fecha_actualizacion'  => now(),
                 ]);
             }
-
-            // Registrar movimiento
             DB::table('movimientos')->insert([
                 'id_producto' => $detalle->id_producto,
                 'tipo'        => 'entrada',
@@ -238,12 +215,9 @@ public function reembolsoCredito($id)
                 'fecha'       => now(),
             ]);
         }
-
-        // Eliminar detalles de factura y la factura
         DB::table('detalle_factura')->where('id_factura', $facturaId)->delete();
         DB::table('facturacion')->where('id_factura', $facturaId)->delete();
 
-        // Eliminar el crédito
         DB::table('creditos')->where('id_credito', $id)->delete();
     });
 

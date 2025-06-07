@@ -10,7 +10,7 @@ class CheckArqueoOpen
   
     public function handle($request, Closure $next)
     {
-        // Busca si existe un arqueo sin monto_final
+
         $abierto = Arqueo::whereNull('monto_final')->exists();
 
         if (! $abierto) {

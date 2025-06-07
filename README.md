@@ -99,3 +99,13 @@ Sigue estos pasos tras clonar el repositorio para tener la aplicación corriendo
 8. Abre en tu navegador:  
    `https://mtq2025.test/home`
  
+9. Admin //Usuario Sembrado
+10. SpAdmin123 //Contraseña Sembrada 
+
+
+Proyecto 2025 Moto Repuestos Quinteros 
+Elaborado por 
+Abell Andres Palacios 
+Ronny Anderson Fuentes Reyes 
+Jander Sadith Hernandez Manzanares 
+Janil Israel Muñiz Montes 
