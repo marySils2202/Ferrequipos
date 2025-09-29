@@ -105,7 +105,4 @@ Sigue estos pasos tras clonar el repositorio para tener la aplicación corriendo
 # Proyecto 2025 Moto Repuestos Quinteros
 
 **Elaborado por:**
-- Abell Andres Palacios  
-- Ronny Anderson Fuentes Reyes  
-- Jander Sadith Hernández Manzanares  
 - Janil Israel Muñiz Montes  
