@@ -42,7 +42,7 @@ public function index()
         ? round($abierto->monto_inicial + $totalVentas, 2)
         : null;
 
-    return view('arqueo', compact(
+    return view('roles.facturador.arqueo', compact(
         'arqueos',
         'abierto',
         'totalVentas',
@@ -102,7 +102,7 @@ public function edit($id)
         : null;
     // ------------------------------------------------------------
 
-    return view('arqueo', compact(
+    return view('roles.facturador.arqueo', compact(
         'arqueos',
         'abierto',
         'editArqueo',

@@ -48,7 +48,7 @@ class DetalleCompraController extends Controller
     public function detalleCompras()
     {
         $detalles = DetalleCompra::with('producto')->get();
-        return view('detalle_compras', compact('detalles'));
+        return view('roles.bodeguero.detalle_compras', compact('detalles'));
     }
     
     

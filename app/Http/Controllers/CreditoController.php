@@ -28,7 +28,7 @@ class CreditoController extends Controller
                                  ->where('cantidad_stock', '>', 0)
                                  ->get();
         $clientes = Cliente::all();
-        return view('facturacion.creditos', [
+        return view('roles.facturador.creditos', [
             'creditos'            => $creditos,
             'creditosPendientes'  => $creditosPendientes,
             'inventarios'         => $inventarios,
@@ -52,7 +52,7 @@ class CreditoController extends Controller
                                  ->get();
         $clientes = Cliente::all();
 
-        return view('facturacion.creditos', compact(
+        return view('roles.facturador.creditos', compact(
             'creditos',
             'credito',
             'inventarios',

@@ -16,7 +16,7 @@ public function index()
 
     $categorias = Categoria::all();
 
-    return view('agregar_producto', compact('productos', 'categorias'));
+    return view('roles.bodeguero.agregar_producto', compact('productos', 'categorias'));
 }
 
 

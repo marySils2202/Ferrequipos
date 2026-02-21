@@ -91,7 +91,7 @@ class FiltrosController extends Controller
                 break;
         }
 
-        return view('filtros_admin', [
+        return view('roles.admin.filtros_admin', [
             'tipo_reporte'     => $tipo_reporte,
             'productos'        => $productos,
             'fecha'            => $fecha,

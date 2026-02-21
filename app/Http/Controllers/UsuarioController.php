@@ -12,7 +12,7 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = Usuario::all();
-        return view('personal', compact('usuarios'));
+        return view('roles.admin.personal', compact('usuarios'));
     }
 
     public function store(Request $request)

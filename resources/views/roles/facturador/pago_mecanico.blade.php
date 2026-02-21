@@ -4,32 +4,7 @@
   <meta charset="UTF-8">
   <title>Pago a Mecánico – Semanal</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { background: #f4f4f4; color: #333; font-family: 'Segoe UI',sans-serif; padding: 2rem; }
-    .back-corner {
-      position: fixed; top: 20px; left: 20px;
-      width: 48px; height: 48px; border-radius: 50%;
-      background: linear-gradient(135deg,#6d5bff,#a986ff);
-      color: #fff; font-size: 1.5rem; line-height: 48px;
-      text-align: center; text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,.15);
-      transition: transform .2s, opacity .2s; z-index: 1000;
-    }
-    .back-corner:hover { transform: translateY(-2px); opacity: .9; }
-    .wrapper {
-      background: #fff; padding: 30px; border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,.1);
-      max-width: 1080px; margin: auto;
-    }
-    .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .card-header {
-      background: #4f46e5; color: #fff; padding: 1rem;
-      border-top-left-radius:8px; border-top-right-radius:8px;
-    }
-    .card-body { padding: 1.5rem; }
-    table { margin-bottom: 0; }
-    th, td { vertical-align: middle!important; }
-  </style>
+  <link rel="stylesheet" href="{{ asset('css/Facturacion/PagoMecanico.css') }}">
 </head>
 <body>
 
@@ -126,51 +101,8 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="modalAgregarMecanico" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <form method="POST" action="{{ route('mecanicos.store') }}">
-        @csrf
-        <div class="modal-content">
-          <div class="modal-header bg-success text-white">
-            <h5 class="modal-title">Agregar Mecánico</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <label>Nombre:</label>
-            <input type="text" name="nombre" class="form-control" required>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-success w-100">Guardar</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="modal fade" id="modalEliminarMecanico" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title">Eliminar Mecánico</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <p>Selecciona un mecánico para eliminar:</p>
-          <ul class="list-group">
-            @foreach($mechanics as $me)
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ $me->nombre }}
-                <form method="POST" action="{{ route('mecanicos.destroy', $me->id_mecanico) }}" onsubmit="return confirm('¿Eliminar {{ $me->nombre }}?')">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-sm btn-danger">Eliminar</button>
-                </form>
-              </li>
-            @endforeach
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+    @include('roles.facturador.pago_mecanico.partials.agregar_mecanico_modal')
+  @include('roles.facturador.pago_mecanico.partials.eliminar_mecanico_modal')
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

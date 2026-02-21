@@ -10,7 +10,7 @@ class ProveedorController extends Controller
     public function index()
     {
         $proveedores = Proveedor::all();
-        return view('agregar_proveedor', compact('proveedores'));
+        return view('roles.bodeguero.agregar_proveedor', compact('proveedores'));
     }
     public function store(Request $request)
     {

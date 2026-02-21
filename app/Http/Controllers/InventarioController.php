@@ -44,7 +44,7 @@ class InventarioController extends Controller
         $categorias   = Categoria::all();
         $inventarios  = $this->consultaBaseInventarios($request);
 
-        return view('inventario', compact('inventarios', 'categorias'));
+        return view('roles.bodeguero.inventario', compact('inventarios', 'categorias'));
     }
     public function exportPdf(Request $request)
     {

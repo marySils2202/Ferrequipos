@@ -26,7 +26,7 @@ class FacturacionController extends Controller
         $mechanics   = Mecanico::orderBy('nombre')->get();
         $nextId      = (Facturacion::max('id_factura') ?? 0) + 1;
 
-        return view('factura', compact(
+        return view('roles.facturador.factura', compact(
             'clientes',
             'proveedores',
             'productos',
@@ -226,7 +226,7 @@ public function pagoMecanico(Request $request)
     ]);
 
     $mecSel = $mecId ? Mecanico::find($mecId) : null;
-    return view('facturacion.pago_mecanico', compact(
+    return view('roles.facturador.pago_mecanico', compact(
         'weeklyData', 'mechanics', 'mecId', 'start', 'end'
     ));
 }

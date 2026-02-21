@@ -40,7 +40,7 @@ class NotificacionesController extends Controller
             ->latest('id_credito')
             ->first();
 
-        return view('notificaciones', compact(
+        return view('roles.admin.notificaciones', compact(
             'alertas',
             'ultima',
             'ultimaFactura',

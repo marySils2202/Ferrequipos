@@ -7,7 +7,7 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="stylesheet" href="{{ asset('css/credito.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/Credito.css') }}">
 </head>
 <body>
   <a href="{{ route('factura') }}" class="back-corner" title="Volver">←</a>
@@ -192,88 +192,10 @@
     🧹
     <span>Limpiar</span>
   </button>
-  <div class="modal fade" id="abonoModal" tabindex="-1">
-    <div class="modal-dialog">
-      <form id="abonoForm" method="POST">
-        @csrf
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Registrar Abono</h5>
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal">
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label class="form-label">Método de pago</label>
-              <select name="metodo" class="form-select">
-                <option value="efectivo">Efectivo</option>
-                <option value="tarjeta">Tarjeta</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Monto</label>
-              <input type="number"
-                     step="0.01"
-                     name="monto_abono"
-                     id="montoInput"
-                     class="form-control"
-                     required>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary">Guardar Abono</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="modal fade" id="modalNuevoCliente" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title">Nuevo Cliente</h5>
-          <button type="button" class="btn-close"
-                  data-bs-dismiss="modal"></button>
-        </div>
+    @include('roles.facturador.creditos.partials.abono_modal')
+  @include('roles.facturador.creditos.partials.nuevo_cliente_modal')
 
-        <form id="formNuevoCliente" method="POST"
-              action="{{ route('clientes.store') }}">
-          @csrf
-          <div class="modal-body">
-            <div class="mb-2">
-              <input name="nombre"
-                     type="text"
-                     class="form-control"
-                     placeholder="Nombre*"
-                     required>
-            </div>
-            <div class="mb-2">
-              <input name="direccion"
-                     type="text"
-                     class="form-control"
-                     placeholder="Dirección">
-            </div>
-            <div class="mb-2">
-              <input name="telefono"
-                     type="text"
-                     class="form-control"
-                     placeholder="Teléfono">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit"
-                    class="btn btn-success w-100">
-              ➕ Agregar Cliente
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-   <script src="{{ asset('js/Facturacion/Credito.js') }}"></script>
+  <script src="{{ asset('js/Facturacion/Credito.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

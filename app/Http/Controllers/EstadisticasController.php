@@ -335,7 +335,7 @@ class EstadisticasController extends Controller
             ? round($descuentoTotal / $facturasConDescuento, 2)
             : 0.0;
 
-        return view('estadisticas', [
+        return view('roles.admin.estadisticas', [
             'tipo'                    => $tipo,
             'mes'                     => $mes,
             'semana'                  => $semana,

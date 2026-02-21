@@ -43,7 +43,7 @@ class MovimientoController extends Controller
                                   ->orderByDesc('fecha')
                                   ->get();
 
-        return view('movimientos', compact(
+        return view('roles.admin.movimientos', compact(
             'productos','categorias',
             'statsComprasPorProducto','movimientos'
         ));

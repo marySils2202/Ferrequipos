@@ -10,7 +10,7 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
-        return view('clientes', compact('clientes'));
+        return view('roles.facturador.clientes', compact('clientes'));
     }
 
  public function store(Request $r)

@@ -18,7 +18,7 @@ class CompraController extends Controller
         $proveedores = Proveedor::all();
         $productos = Producto::all();
         $usuario = auth()->user();
-        return view('compras', compact('proveedores', 'productos', 'usuario'));
+        return view('roles.bodeguero.compras', compact('proveedores', 'productos', 'usuario'));
     }
 public function store(Request $request)
 {
@@ -94,12 +94,12 @@ public function store(Request $request)
                         'compra.usuario'
                     ])->get();
 
-        return view('detalle_compras', compact('detalles'));
+        return view('roles.bodeguero.detalle_compras', compact('detalles'));
     }
     public function verInventario()
     {
         $inventario = Inventario::with('producto')->get();
-        return view('inventario', compact('inventario'));
+        return view('roles.bodeguero.inventario', compact('inventario'));
     }
     public function actualizarPrecio(Request $request, $id)
     {

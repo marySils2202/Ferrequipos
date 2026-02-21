@@ -45,6 +45,6 @@ class LibroVentasController extends Controller
             $venta->ganancia_diaria = $gananciaDiaria;
         }
 
-        return view('libro_ventas', compact('ventas'));
+        return view('roles.facturador.libro_ventas', compact('ventas'));
     }
 }
