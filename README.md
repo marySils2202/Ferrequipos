@@ -73,36 +73,90 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 Sigue estos pasos tras clonar el repositorio para tener la aplicación corriendo en tu máquina:
 
 1. Clona el repositorio y entra en la carpeta:  
-   `git clone https://github.com/tu-usuario/MTQ2025.git && cd MTQ2025`
+   `git clone https://github.com/jimm2004/MTQ2025.git && cd MTQ2025`
 
 2. Instala las dependencias de PHP:  
    `composer install`
 
 3. Copia y configura el env:  
-   `cp .env.example .env`  
-   Edita `.env` y ajusta las credenciales de tu base de datos (`DB_*`) y pon:  
-   `APP_URL=https://mtq2025.test`
+   `copy NUL .env`
+     
+   Edita `.env` Pega lo siguiente :  
 
-4. Genera la clave de la aplicación:  
+`APP_NAME=MTQ2025
+APP_ENV=local
+APP_KEY=base64:v24jqmwrRdjtdEGkcvaF3RHXb6Pswt+//ZWrxi0tpUE=
+APP_DEBUG=true
+APP_URL=https://mtq2025.test
+
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=MTQuinteros2025
+DB_USERNAME=root
+DB_PASSWORD=
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
+
+VITE_APP_NAME="${APP_NAME}"`
+
+5. Genera la clave de la aplicación:  
    `php artisan key:generate`
 
-5. Ejecuta migraciones y seeders (crea tablas y datos de ejemplo):  
+6. Ejecuta migraciones y seeders (crea tablas y datos de ejemplo):  
    `php artisan migrate:fresh --seed`
 
-6. (Opcional) Instala y compila assets si usas Mix/Vite:  
+7. (Opcional) Instala y compila assets si usas Mix/Vite:  
    `npm install && npm run dev`
 
-7. Configura el host local añadiendo al archivo de hosts:  
+8. Configura el host local añadiendo al archivo de hosts:  
    `127.0.0.1   mtq2025.test`  
    y apunta tu virtual host o Valet al directorio `public/` del proyecto.
 
-8. Abre en tu navegador:  
+9. Abre en tu navegador:  
    `https://mtq2025.test/home`
  
-9. Admin //Usuario Sembrado
-10. SpAdmin123 //Contraseña Sembrada 
+10. Admin //Usuario Sembrado
+11. SpAdmin123 //Contraseña Sembrada 
 
 # Proyecto 2025 Moto Repuestos Quinteros
 
 **Elaborado por:**
 - Janil Israel Muñiz Montes  
+
